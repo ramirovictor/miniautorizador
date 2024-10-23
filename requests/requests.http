@@ -1,0 +1,63 @@
+### print 1 - Criar um novo cartão
+POST http://localhost:8080/cartoes
+Authorization: Basic YWRtaW46YWRtaW4=
+Content-Type: application/json
+
+{
+  "numeroCartao": "6549873025634501",
+  "senha": "1234"
+}
+
+### print 2 - Obter saldo do um cartão recem criado
+GET http://localhost:8080/cartoes/6549873025634501
+Authorization: Basic YWRtaW46YWRtaW4=
+
+### print 3 - Realizar uma transação
+POST http://localhost:8080/cartoes/transacoes
+Authorization: Basic YWRtaW46YWRtaW4=
+Content-Type: application/json
+
+{
+  "numeroCartao": "6549873025634501",
+  "senhaCartao": "1234",
+  "valor": 10.00
+}
+
+### print 4 -Verificar o saldo após a transação
+GET http://localhost:8080/cartoes/6549873025634501
+Authorization: Basic YWRtaW46YWRtaW4=
+
+
+### print 5 - Verificar saldo insuficiente (é necessário executar essa chamada várias vezes até zerar o saldo ou aumentar o valor da transação)
+POST http://localhost:8080/cartoes/transacoes
+Authorization: Basic YWRtaW46YWRtaW4=
+Content-Type: application/json
+
+{
+  "numeroCartao": "6549873025634501",
+  "senhaCartao": "1234",
+  "valor": 10.00
+}
+
+### print 6 - Testar uma transação com senha inválida
+POST http://localhost:8080/cartoes/transacoes
+Authorization: Basic YWRtaW46YWRtaW4=
+Content-Type: application/json
+
+{
+  "numeroCartao": "6549873025634501",
+  "senhaCartao": "0000",
+  "valor": 10.00
+}
+
+### print 7 - Testar uma transação com cartão inexistente
+POST http://localhost:8080/cartoes/transacoes
+Authorization: Basic YWRtaW46YWRtaW4=
+Content-Type: application/json
+
+{
+  "numeroCartao": "0000000000000000",
+  "senhaCartao": "1234",
+  "valor": 10.00
+}
+
