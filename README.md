@@ -67,7 +67,7 @@ Esta aplicação inclui uma documentação interativa da API gerada automaticame
 - **Username**: `admin`
 - **Password**: `admin`
 
-A partir dessa interface, você poderá visualizar os endpoints disponíveis, suas respectivas respostas e testar as chamadas diretamente pelo navegador também.
+A partir dessa interface, você poderá visualizar os endpoints disponíveis, suas respectivas respostas.
 
 
 ### Testes
