@@ -28,7 +28,7 @@ O projeto vem com um arquivo docker-compose.yml que inclui configurações para 
  
 ### 1. Clonar o repositório:
 ```bash
-git clone https://github.com/seu-usuario/miniautorizador.git
+git clone https://github.com/ramirovictor/miniautorizador.git
 cd miniautorizador
 ```
 
