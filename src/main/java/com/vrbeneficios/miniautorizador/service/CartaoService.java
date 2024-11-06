@@ -8,11 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-
 @Service
 public class CartaoService {
-
-
 
     private final CartaoRepository cartaoRepository;
 
@@ -31,7 +28,8 @@ public class CartaoService {
     }
 
     public BigDecimal obterSaldo(String numeroCartao) {
-        Cartao cartao = cartaoRepository.findById(numeroCartao).orElseThrow(() -> new IllegalArgumentException("Cartão inexistente"));
+        Cartao cartao = cartaoRepository.findById(numeroCartao)
+                .orElseThrow(() -> new IllegalArgumentException("Cartão inexistente"));
         return cartao.getSaldo();
     }
 
@@ -43,11 +41,7 @@ public class CartaoService {
             throw new IllegalArgumentException("Senha inválida");
         }
 
-        if (cartao.getSaldo().compareTo(transacaoDTO.valor()) < 0) {
-            throw new IllegalArgumentException("Saldo insuficiente");
-        }
-
-        cartao.setSaldo(cartao.getSaldo().subtract(transacaoDTO.valor()));
+        cartao.debitarSaldo(transacaoDTO.valor());
         cartaoRepository.save(cartao);
     }
 }

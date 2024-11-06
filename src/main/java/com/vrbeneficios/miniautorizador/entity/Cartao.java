@@ -11,18 +11,29 @@ import java.math.BigDecimal;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Cartao {
 
-    @Id
-    private String numeroCartao;
+        @Id
+        private String numeroCartao;
+        private String senha;
+        private BigDecimal saldo;
 
-    private String senha;
+        public Cartao(String numeroCartao, String senha, BigDecimal saldo) {
+            this.numeroCartao = numeroCartao;
+            this.senha = senha;
+            this.saldo = saldo;
+        }
 
-    private BigDecimal saldo;
+        public boolean possuiSaldoSuficiente(BigDecimal valor) {
+            return this.saldo.compareTo(valor) >= 0;
+        }
 
-
-}
+        public void debitarSaldo(BigDecimal valor) {
+            if (!possuiSaldoSuficiente(valor)) {
+                throw new IllegalArgumentException("Saldo insuficiente");
+            }
+            this.saldo = this.saldo.subtract(valor);
+        }
+    }
 
