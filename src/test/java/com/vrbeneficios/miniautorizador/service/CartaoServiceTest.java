@@ -27,7 +27,7 @@ public class CartaoServiceTest {
     private CartaoRepository cartaoRepository;
 
     @Test
-    void criarCartao_deveCriarNovoCartao() {
+    void givenNewCartao_whenCriarCartao_thenShouldCreateAndSaveCartao() {
         CartaoDTO cartaoDTO = new CartaoDTO("6549873025634501", "1234");
         Cartao novoCartao = new Cartao(cartaoDTO.numeroCartao(), cartaoDTO.senha(), BigDecimal.valueOf(500.00));
 
@@ -43,7 +43,7 @@ public class CartaoServiceTest {
     }
 
     @Test
-    void obterSaldo_deveRetornarSaldoCorreto() {
+    void givenExistingCartao_whenObterSaldo_thenShouldReturnCorrectSaldo() {
         Cartao cartao = new Cartao("6549873025634501", "1234", BigDecimal.valueOf(500.00));
         when(cartaoRepository.findById(cartao.getNumeroCartao())).thenReturn(Optional.of(cartao));
 
@@ -53,7 +53,7 @@ public class CartaoServiceTest {
     }
 
     @Test
-    void autorizarTransacao_deveDebitarSaldo() {
+    void givenValidTransacao_whenAutorizarTransacao_thenShouldDebitSaldo() {
         Cartao cartao = new Cartao("6549873025634501", "1234", BigDecimal.valueOf(500.00));
         TransacaoDTO transacaoDTO = new TransacaoDTO("6549873025634501", "1234", BigDecimal.valueOf(100.00));
         when(cartaoRepository.findById(transacaoDTO.numeroCartao())).thenReturn(Optional.of(cartao));
